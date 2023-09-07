@@ -10,7 +10,7 @@
    --icon-initial-state: #8E8F99;
    --footer-icon-pressed-state: #31D0AA;
    --modal-background:#FCFCFC;
-
+   --transition-duration: 250ms;
 }
 
 * {
@@ -58,6 +58,7 @@ img {
 .contacts-menu a:hover,
 .contacts-menu a:focus {
    color: var(--pressed-state);
+   transition: color var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /*header section -- all pages*/
@@ -127,7 +128,7 @@ img {
    font-weight: 500;
    line-height: 24px;
    letter-spacing: 0.32px;
-   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+   transition: color var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-menu,
@@ -197,7 +198,6 @@ contacts-menu {
 button {
    font-family: inherit;
    border-radius: 4px;
-   /*box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15); */
    border-color: transparent;
    cursor: pointer;
 }
@@ -211,7 +211,7 @@ button {
    line-height: 24px;
    letter-spacing: 0.64px;
    color: var(--primary-white-color);
-   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+   transition: background-color var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button.button-primary:hover,
@@ -244,7 +244,7 @@ button {
    letter-spacing: 0.04em;
    cursor: pointer;
    display: flex;
-   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+   transition: background-color var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /*
@@ -261,6 +261,7 @@ button {
    color: var(--primary-white-color);
    border-color: transparent;
    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 3px 1px 0px rgba(0, 0, 0, 0.10);
+   transition: box-shadow var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .section {
@@ -368,12 +369,9 @@ section.no-top-padding {
    margin-bottom: 32px;
 }
 
-/* Default styles for the icon */
 .socmed-item {
    position: relative;
    display: inline-block;
-   /*margin-right: 10px;
-    Add spacing between items */
 }
 
 .social-link {
@@ -386,7 +384,7 @@ section.no-top-padding {
    line-height: 40px;
    border-radius: 50%;
    background-color: var(--primary-brand-color);
-   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+   transition: background-color var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
    text-decoration: none;
    outline: none;
 }
@@ -396,6 +394,7 @@ section.no-top-padding {
 .social-link:focus {
    background-color: var(--pressed-state);
    outline: none;
+   transition: background-color var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-link:hover svg use,
@@ -404,19 +403,23 @@ section.no-top-padding {
    cursor: pointer;
 }
 
-/* Modal window */
+/* modal */
 .backdrop {
    position: fixed;
    top: 0;
    left: 0;
-   width: 100%;
-   height: 100%;
-   background-color: rgba(0, 0, 0, 0.40);
+   background-color: rgba(0, 0, 0, 0.40); /* D1 */
+   width: 100%; /* D2 */
+   height: 100%; /* D2 */
+   pointer-events: auto;
    opacity: 1;
-   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+   transition-property: visibility, opacity;
+   transition-duration: var(--transition-duration);
+   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .backdrop.is-hidden {
+   visibility: hidden;
    opacity: 0;
    pointer-events: none;
 }
@@ -429,32 +432,34 @@ section.no-top-padding {
    min-height: 584px;
    background-color: var(--modal-background);
    border-radius: 4px;
-   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.20), 0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.14);
+   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.20), 
+               0px 1px 3px 0px rgba(0, 0, 0, 0.12), 
+               0px 1px 1px 0px rgba(0, 0, 0, 0.14);
 
    transform: translate(-50%, -50%) scale(1);
-   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+   transition: transform var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .backdrop.is-hidden .modal {
-   transform: translate(-50%, -50%) scale(0.8);
+   transform: translate(-50%, -50%) scale(0.5);
 }
 
 .modal .close {
    position: absolute;
-   top: 8px;
-   right: 8px;
+   top: 10px;
+   right: 10px;
    padding: 0;
    display: flex;
    justify-content: center;
    align-items: center;
    width: 24px;
    height: 24px;
-   background-color: var(--primary-white-color);
+   background-color: var(--accent-color);
    color: var(--black-color);
-   border: 1px solid rgba(0, 0, 0, 0.1);
+   border: 1px solid rgba(0, 0, 0, 0.10);
    border-radius: 15px;
    cursor: pointer;
-   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+   transition: color var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 
@@ -462,6 +467,7 @@ section.no-top-padding {
 .modal .close:focus {
    background-color: var(--pressed-state);
    fill: var(--light-mode-color);
+   transition: background-color var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* project cards -portfolio.html */
@@ -471,7 +477,6 @@ section.no-top-padding {
    flex-wrap: wrap;
    margin-left: -30px;
    margin-top: -30px;
-   transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-card {
@@ -484,54 +489,40 @@ section.no-top-padding {
 .project-card:hover,
 .project-card:focus {
    box-shadow: 0px 2px 1px 0px rgba(46, 47, 66, 0.08), 0px 1px 1px 0px rgba(46, 47, 66, 0.16), 0px 1px 6px 0px rgba(46, 47, 66, 0.08);
+   transition: box-shadow var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
-/* overlay part */
 
-.project-card {
+/* the overlay part */
+.project-card-figure {
    position: relative;
    overflow: hidden;
 }
 
-.card.link {
-   position: relative;
-   display: inline-block;
-}
-
-.overlay-part {
-   position: relative;
-}
-
-.image {
-   display: block;
-   width: 100%;
-   height: auto;
-}
-
-.overlay {
+.project-card-figure figcaption {
    position: absolute;
-   bottom: 0;
-   left: 0;
-   width: 100%;
-   height: 0;
-   background-color: var(--primary-brand-color);
-   color: var(--light-mode-color);
-   opacity: 0;
-   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.overlay-part:hover .overlay {
+   top: 0px;
+   left: 0px;
+   width:100%;
    height: 100%;
-   opacity: 1;
-}
-
-.overlay .overlay-text {
-   padding: 10px;
-   margin: 40px 32px 164px 32px;
+   background-color: var(--primary-brand-color);
+   padding:40px;
    font-size: 16px;
    font-style: normal;
    font-weight: 400;
+   line-height: 24px;
    letter-spacing: 0.32px;
+   color: var(--light-mode-color);
+   
+   transition: transform var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+   transform: translateY(100%);
 }
+
+.project-card:hover figcaption {
+   transform: translateY(0);
+
+}
+
+/*until here */
 
 .substrate {
    background-color: var(--primary-white-color);
@@ -606,8 +597,7 @@ section.no-top-padding {
    background-color: var(--primary-brand-color);
    color: var(--icon-color);
    border-radius: 50%;
-
-   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+   transition: color var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Hover and focus styles */
@@ -615,12 +605,14 @@ section.no-top-padding {
 .footer-icon:focus {
    background-color: var(--footer-icon-pressed-state);
    outline: none;
+   transition: background-color var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-icon:hover svg use,
 .footer-icon:focus svg use {
    fill: var(--accent-color);
    cursor: pointer;
+   transition: fill var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /*Customers Section */
@@ -648,7 +640,7 @@ section.no-top-padding {
    border-radius: 4px;
    fill: var(--icon-initial-state);
    outline: none;
-   transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+   transition: border var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .icon use:hover,
