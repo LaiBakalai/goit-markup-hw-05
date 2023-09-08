@@ -115,10 +115,8 @@ img {
 
 /* header section: navigation menu */
 
-.nav-menu,
-.page,
-.contacts-menu,
-.contact {
+.nav-menu .page,
+.contacts-menu .contact {
    display: flex;
    padding-top: 25.5px;
    padding-bottom: 25.5px;
@@ -137,6 +135,8 @@ img {
 .contact {
    gap: 40px;
 }
+
+
 
 contacts-menu {
    margin-left: auto;
